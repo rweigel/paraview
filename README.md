@@ -38,6 +38,8 @@ Other useful links:
 
 The following terms are used in this set of notes.  The usage of these terms in these notes are consistent, but may be inconsistent with definitions used in the [[#References|references]] (and in many cases, the references have conflicting or differing definitions).
 
+Chapter 5 of https://gitlab.kitware.com/vtk/textbook/raw/master/VTKBook/VTKTextBook.pdf covers data representation.
+
 * VTK - Visualization Tool Kit; a software library for creating computer graphics.
 * ParaView - An application that uses VTK to allow for display of and interaction with computer graphics.
 * Coordinate - The x, y, and z values of a point in space.
