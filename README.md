@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ParaView and VTK
 
 ParaView stands for "Parallel View".  It is a scientific visualization program developed especially for viewing large 3-D scientific data sets.  The primary interface is a GUI, although scripting is possible using Python.
@@ -41,7 +40,6 @@ The following terms are used in this set of notes.  The usage of these terms in 
 
 * VTK - Visualization Tool Kit; a software library for creating computer graphics.
 * ParaView - An application that uses VTK to allow for display of and interaction with computer graphics.
-* Data model - How data are described, grouped, connected.   A key part of the data model of MATLAB is the matrix, which represents a group of numbers in tabular form.  Each datum in the table is identified (described) by specifying the row and column in which it is located. 
 * Coordinate - The x, y, and z values of a point in space.
 * Vertex - A point in space that has zero or more lines connected to it.  "Points" and "Vertex" are often used interchangeably, and a vertex with zero lines connected to it is often referred to as simply a point.
 * Dataset -  A collection of coordinate values (that correspond vertices in a 3-dimensional space) and connections of these points.  Dataset types include Structured Points, Rectilinear Grid, Structured Grid, and Unstructured Grids.
@@ -52,8 +50,8 @@ The following terms are used in this set of notes.  The usage of these terms in 
 * Surface graphics primitives - vertices, lines, polygons, and triangle strips.  Each primitive corresponds to a cell and has a front and back surface.
 * Polygon - A set of points connected with lines.
 * Grid - A set of coordinates (locations of vertices).
-* Mesh - A set of cells and vertices; defined by topology and geometry) ([http://www.paraview.org/files/v4.0/ParaViewManual.v4.0.pdf pg 13])
-* Connectivity - The mapping from cells to vertices ([http://www.paraview.org/files/v4.0/ParaViewManual.v4.0.pdf pg 13])
+* [Mesh](https://docs.paraview.org/en/latest/UsersGuide/understandingData.html?#mesh) - A set of cells and vertices; defined by topology and geometry
+* [Connectivity](https://docs.paraview.org/en/latest/UsersGuide/understandingData.html?highlight=connectivity) - The mapping from cells to vertices.
 
 ## Introduction 
 
@@ -76,7 +74,7 @@ The following examples illustrate the VTK file format.  Additional details are g
 
 **Example**
 
-To test this file in ParaView, open a text editor (e.g., Notepad, TextWrangler, or GEdit), copy the following text, save it as `demo.vtk` and then open the file in ParaView and click the Apply button.  You should see a diagonal line.
+To test this file in ParaView, open a text editor, copy the following text, save it as `demo.vtk` and then open the file in ParaView and click the Apply button.  You should see a diagonal line.
 
 ```
 # vtk DataFile Version 3.0
@@ -99,14 +97,14 @@ The interpretation of `POINTS 2 float`, `LINES 1 3`, and `2 0 1` is:
 * `LINES 1 3`: `1` row of line connections are to follow; each row has `3` integers.  Note that this primitive (`LINES`) does not require a `dataType` to be specified (e.g., `float`).  The dataType is always an integer.
 * `2 0 1`: `2` integers (that refer to points in the point list) are to follow and the first point (identified with `0`) in the list of points is connected to the second point (identified with `1`).
 
-In this and the following examples, the keyword `float` appears.  This keyword identifies how the numbers that follow should be interpreted.   From [http://www.vtk.org/VTK/img/file-formats.pdf]:
+In this and the following examples, the keyword `float` appears.  This keyword identifies how the numbers that follow should be interpreted. From http://www.vtk.org/VTK/img/file-formats.pdf:
 
 
 > dataType is one of the types bit, unsigned_char, char, unsigned_short, short, unsigned_int, int, unsigned_long, long, float, or double. These keywords are used to describe the form of the data {numbers}, both for reading from file, as well as constructing the appropriate internal objects. Not all data types are supported for all classes {primitives}.
 
-*Example*
+**Example**
 
-This file connects three points with a single line and can be read by ParaView.
+This file connects three points with a single line.
 
 ```
 # vtk DataFile Version 3.0
@@ -124,19 +122,25 @@ LINES 1 4
 
 In this example, three points are specified at the x,y,z values of `0,0,0`, `1,0,0`, and `1,1,0`.  The first point in the list is the 0th point (by definition).  The second is the 1st point, etc.  The statement `LINES 1 4` means "one line specification is to follow and the total number of numbers that specify each line is four".  The statement `3 0 1 2` means "three numbers are to follow that identify how the points are connected to form a line.  Connect point 0 to point 1 to point 2".
 
-To close the triangle, you could modify the last two statements from
- LINES 1 4
- 3 0 1 2
-to
- LINES 1 5
- 4 0 1 2 0
-The last statement now means "4 values that specify a line are to follow.  To create the line, connect point 0 to 1, 1 to 2, and then 2 back to 0".
-
 <img src="https://raw.githubusercontent.com/rweigel/cds301/master/vtk/LinesA.png" width=400px/>
 
-*Example*
+To close the triangle, you could modify the last two statements from
 
-Three points can be connected with two individual lines using the following file.
+```
+LINES 1 4
+3 0 1 2
+```
+to
+```
+LINES 1 5
+4 0 1 2 0
+```
+
+The last statement now means "4 values that specify a line are to follow.  To create the line, connect point 0 to 1, 1 to 2, and then 2 back to 0".
+
+**Example**
+
+Three points can be connected with two individual lines.
 
 The statement `LINES 2 6` means "two lines are to follow.  The total number of values used to describe the lines is 6."  The statement `2 0 1` means "2 values that specify a line are to follow.  This line should connect point 0 to point 1.  The statement `2 1 2` means "2 values that specify a line are to follow.  This line should connect point 1 to point 2".
 
@@ -160,7 +164,7 @@ LINES 2 6
 <img src="https://raw.githubusercontent.com/rweigel/cds301/master/vtk/LinesB.png" width=400px/>
 
 
-*Example*
+**Example**
 
 In this file, the lines are connected in a different way.
 
@@ -366,10 +370,8 @@ POINTS 4 float
 
 <img src="https://raw.githubusercontent.com/rweigel/cds301/master/vtk/StructuredGridA.png" width=400px"/>
 
-'''Example (invalid)'''
-{|style="border-top:1px solid black" cellpadding="2" width="100%" align="left"
-|-
-|style="vertical-align:top" width="50%" |
+**Example (invalid)**
+
 Note that the order in which the points are specified matters.  VTK uses the point ordering to infer the topology.
 
 In this example, the surface color is black and coloring by cell normals does not work.  The reason is that the cell created is not valid.
