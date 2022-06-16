@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ParaView and VTK
 
 ParaView stands for "Parallel View".  It is a scientific visualization program developed especially for viewing large 3-D scientific data sets.  The primary interface is a GUI, although scripting is possible using Python.
@@ -3823,3 +3824,9 @@ File service.py:
  import subprocess
  subprocess.call("test1.py", shell=True)
 ```
+=======
+# paraview
+Weigel's ParaView notes
+
+TODO: Move http://bobweigel.net/computingforscientists/index.php?title=ParaView here.
+>>>>>>> d2d649047c04ad4db83d6d15a6d155c6318cccbf
